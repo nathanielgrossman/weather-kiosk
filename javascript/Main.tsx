@@ -1,11 +1,15 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 
+import { AuthContextProvider } from './contexts/AuthContext'
+
 const Main = () => {
   return (
-    <View>
-      <Text>hello world</Text>
-    </View>
+    <AuthContextProvider>
+      <View>
+        <Text>hello world</Text>
+      </View>
+    </AuthContextProvider>
   )
 }
 
