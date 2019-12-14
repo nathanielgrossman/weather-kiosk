@@ -9,11 +9,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "@types/react-native-dotenv": "^0.2.0",
     "axios": "^0.19.0",
     "react": "16.9.0",
-    "react-native": "0.61.5",
-    "react-native-dotenv": "^0.2.0"
+    "react-native": "0.61.5"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
@@ -25,6 +23,7 @@
     "babel-jest": "^24.9.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
+    "react-native-dotenv": "^0.2.0",
     "react-test-renderer": "16.9.0",
     "typescript": "^3.6.3"
   },
