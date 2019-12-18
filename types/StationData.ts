@@ -26,11 +26,11 @@ export interface Device {
   data_type: string[]
   place: Place
   read_only: boolean
-  dashboard_data: DeviceDashboardData
+  dashboard_data: MainModuleData
   modules: ModuleData[]
 }
 
-export interface DeviceDashboardData {
+export interface MainModuleData {
   time_utc: number
   Temperature: number
   CO2: number
@@ -64,25 +64,27 @@ export interface ModuleDataCommon {
 
 export interface IndoorData extends ModuleDataCommon {
   data_type: ['Temperature, Humidity, CO2']
-  dashboard_data: IndoorDashboardData
+  dashboard_data: IndoorModuleData
 }
 
 export interface OutdoorData extends ModuleDataCommon {
   data_type: ['Temperature, Humidity']
-  dashboard_data: OutdoorDashboardData
+  dashboard_data: OutdoorModuleData
 }
 
 export interface RainData extends ModuleDataCommon {
   data_type: ['Rain']
-  dashboard_data: RainDashboardData
+  dashboard_data: RainModuleData
 }
 
 export interface WindData extends ModuleDataCommon {
   data_type: ['Wind']
-  dashboard_data: WindDashboardData
+  dashboard_data: WindModuleData
 }
 
-export interface IndoorDashboardData {
+export type ModuleDashboardData = IndoorModuleData | OutdoorModuleData | RainModuleData | WindModuleData
+
+export interface IndoorModuleData {
   time_utc: number
   Temperature: number
   CO2: number
@@ -96,7 +98,7 @@ export interface IndoorDashboardData {
   temp_trend: Trend
 }
 
-export interface OutdoorDashboardData {
+export interface OutdoorModuleData {
   time_utc: number
   Temperature: number
   Humidity: number
@@ -107,14 +109,14 @@ export interface OutdoorDashboardData {
   temp_trend: Trend
 }
 
-export interface RainDashboardData {
+export interface RainModuleData {
   time_utc: number
   Rain: number
   sum_rain_24: number
   sum_rain_1: number
 }
 
-export interface WindDashboardData {
+export interface WindModuleData {
   time_utc: number
   WindStrength: number
   WindAngle: number
@@ -148,3 +150,9 @@ export interface Administrative {
 }
 
 export type Trend = 'up' | 'down' | 'stable'
+
+export enum MODULE_TYPES {
+  OUTDOOR = 'NAModule1',
+  RAIN = 'NAModule3',
+  WIND = 'NAModule2',
+}

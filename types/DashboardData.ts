@@ -28,15 +28,16 @@ export interface WindDashboardData {
 }
 
 export interface UniversalData {
-  time_utc: number
+  time_utc: string
   station_name: string
 }
 
 export interface DashboardData {
-  TemperatureDashboardData: TemperatureDashboardData
-  AuxiliaryDashboardData: AuxiliaryDashboardData
-  HumidityDashboardData: HumidityDashboardData
-  RainDashboardData: RainDashboardData
-  WindDashboardData: WindDashboardData
-  UniversalData: UniversalData
+  indoorDashboardData: TemperatureDashboardData
+  outdoorDashboardData: TemperatureDashboardData
+  auxiliaryDashboardData: AuxiliaryDashboardData
+  humidityDashboardData: HumidityDashboardData
+  rainDashboardData: RainDashboardData
+  windDashboardData: WindDashboardData
+  universalData: UniversalData
 }
