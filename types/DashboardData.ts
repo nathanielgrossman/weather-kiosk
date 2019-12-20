@@ -33,11 +33,11 @@ export interface UniversalData {
 }
 
 export interface DashboardData {
-  indoorDashboardData: TemperatureDashboardData
-  outdoorDashboardData: TemperatureDashboardData
-  auxiliaryDashboardData: AuxiliaryDashboardData
-  humidityDashboardData: HumidityDashboardData
-  rainDashboardData: RainDashboardData
-  windDashboardData: WindDashboardData
-  universalData: UniversalData
+  indoorDashboardData: TemperatureDashboardData | null
+  outdoorDashboardData: TemperatureDashboardData | null
+  auxiliaryDashboardData: AuxiliaryDashboardData | null
+  humidityDashboardData: HumidityDashboardData | null
+  rainDashboardData: RainDashboardData | null
+  windDashboardData: WindDashboardData | null
+  universalData: UniversalData | null
 }

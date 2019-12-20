@@ -4,20 +4,26 @@ import { Text, ScrollView, StyleSheet } from 'react-native'
 import StationContext from '../contexts/StationContext'
 
 const DebugReadout = () => {
-  const {data} = useContext(StationContext)
+  const contextData = useContext(StationContext)
 
   return (
-    <ScrollView>
-      <Text style={STYLES.debug}>{JSON.stringify(data, null, 2)}</Text>
+    <ScrollView contentContainerStyle={STYLES.container} style={STYLES.flex}>
+      <Text style={STYLES.debug}>{JSON.stringify(contextData, null, 2)}</Text>
     </ScrollView>
   )
 }
 
 const STYLES = StyleSheet.create({
+  flex: {
+    flex: 1,
+  },
+  container: {
+    backgroundColor: 'black',
+  },
   debug: {
     color: 'white',
-    backgroundColor: 'black'
-  }
+    backgroundColor: 'black',
+  },
 })
 
 export default DebugReadout

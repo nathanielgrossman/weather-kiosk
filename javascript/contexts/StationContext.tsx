@@ -3,13 +3,22 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 import { getStationsData } from '../api/station'
 import { StationData } from 'types/StationData'
 import AuthContext from './AuthContext'
+import { parseRawData } from '../utils/station'
+import { DashboardData } from 'types/DashboardData'
 
-type AuthContextValues = {
-  data: StationData | null
+type AuthContextValues = DashboardData & {
+  rawData: StationData | null
 }
 
 const initialValues: AuthContextValues = {
-  data: null
+  indoorDashboardData: null,
+  outdoorDashboardData: null,
+  auxiliaryDashboardData: null,
+  humidityDashboardData: null,
+  rainDashboardData: null,
+  windDashboardData: null,
+  universalData: null,
+  rawData: null,
 }
 
 const StationContext = createContext(initialValues)
@@ -21,9 +30,9 @@ type Props = {
 }
 
 export const StationContextProvider = ({ children }: Props) => {
-  const [data, setData] = useState(initialValues.data)
+  const [value, setValue] = useState(initialValues)
 
-  const {accessToken} = useContext(AuthContext)
+  const { accessToken } = useContext(AuthContext)
 
   useEffect(() => {
     if (!accessToken) return
@@ -32,7 +41,11 @@ export const StationContextProvider = ({ children }: Props) => {
       const response = await getStationsData(accessToken)
       if (response) {
         const stationData = response
-        setData(stationData)
+        const parsedData = parseRawData(stationData)
+        setValue({
+          rawData: stationData,
+          ...parsedData,
+        })
       }
       refreshTimeout = setTimeout(request, 10000)
     }
@@ -43,12 +56,8 @@ export const StationContextProvider = ({ children }: Props) => {
     }
   }, [accessToken])
 
-  const contextValues = {
-    data,
-  }
-
   return (
-    <StationContext.Provider value={contextValues}>
+    <StationContext.Provider value={value}>
       {children}
     </StationContext.Provider>
   )

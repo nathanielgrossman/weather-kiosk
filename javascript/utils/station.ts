@@ -8,7 +8,8 @@ import {
   StationData,
   MODULE_TYPES,
   ModuleDashboardData,
-} from 'types/StationData'
+  ModuleData,
+} from '../../types/StationData'
 import {
   TemperatureDashboardData,
   HumidityDashboardData,
@@ -16,7 +17,7 @@ import {
   WindDashboardData,
   UniversalData,
   DashboardData,
-} from 'types/DashboardData'
+} from '../../types/DashboardData'
 
 export const generateTemperatureDashboardData = ({
   Temperature,
@@ -63,38 +64,47 @@ export const generateUniversalData = (rawData: StationData): UniversalData => ({
 export const parseRawData = (rawData: StationData): DashboardData => {
   const output = {
     universalData: generateUniversalData(rawData),
+    indoorDashboardData: null,
+    outdoorDashboardData: null,
+    auxiliaryDashboardData: null,
+    humidityDashboardData: null,
+    rainDashboardData: null,
+    windDashboardData: null,
   } as DashboardData
-  const modules = _.get(rawData, 'body.devices[0].modules', [])
-  modules.array.forEach((module: ModuleDashboardData) => {})
+  const modules: ModuleData[] = _.get(rawData, 'body.devices[0].modules', [])
+  const mainModule: MainModuleData = _.get(rawData, 'body.devices[0].dashboard_data', {})
+  modules.forEach((module: ModuleData) =>
+    parseModule(module, mainModule, output),
+  )
   return output
 }
 
 export const parseModule = (
-  rawModuleData: ModuleDashboardData,
+  rawModuleData: ModuleData,
   rawMainData: MainModuleData,
   output: Partial<DashboardData>,
 ) => {
-  const { type } = rawModuleData
+  const { type, dashboard_data } = rawModuleData
   switch (type) {
     case MODULE_TYPES.OUTDOOR:
       output.indoorDashboardData = generateTemperatureDashboardData(rawMainData)
       output.outdoorDashboardData = generateTemperatureDashboardData(
-        rawModuleData as OutdoorModuleData,
+        dashboard_data as OutdoorModuleData,
       )
       output.humidityDashboardData = generateHumidityDashboardData(
-        rawModuleData as OutdoorModuleData,
+        dashboard_data as OutdoorModuleData,
         rawMainData,
       )
       break
     case MODULE_TYPES.RAIN:
       output.rainDashboardData = generateRainDashboardData(
-        rawModuleData as RainModuleData,
+        dashboard_data as RainModuleData,
       )
 
       break
     case MODULE_TYPES.WIND:
       output.windDashboardData = generateWindDashboardData(
-        rawModuleData as WindModuleData,
+        dashboard_data as WindModuleData,
       )
 
       break
