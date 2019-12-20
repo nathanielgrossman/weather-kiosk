@@ -26,7 +26,7 @@ const StationContext = createContext(initialValues)
 export default StationContext
 
 type Props = {
-  children: React.ReactNode
+  children: React.ReactChildren
 }
 
 export const StationContextProvider = ({ children }: Props) => {
@@ -42,10 +42,12 @@ export const StationContextProvider = ({ children }: Props) => {
       if (response) {
         const stationData = response
         const parsedData = parseRawData(stationData)
-        setValue({
-          rawData: stationData,
-          ...parsedData,
-        })
+        if (stationData && parsedData) {
+          setValue({
+            rawData: stationData,
+            ...parsedData,
+          })
+        }
       }
       refreshTimeout = setTimeout(request, 10000)
     }
@@ -57,8 +59,6 @@ export const StationContextProvider = ({ children }: Props) => {
   }, [accessToken])
 
   return (
-    <StationContext.Provider value={value}>
-      {children}
-    </StationContext.Provider>
+    <StationContext.Provider value={value}>{children}</StationContext.Provider>
   )
 }

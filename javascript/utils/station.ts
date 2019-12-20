@@ -9,6 +9,7 @@ import {
   MODULE_TYPES,
   ModuleDashboardData,
   ModuleData,
+  IndoorModuleData,
 } from '../../types/StationData'
 import {
   TemperatureDashboardData,
@@ -17,6 +18,7 @@ import {
   WindDashboardData,
   UniversalData,
   DashboardData,
+  AuxiliaryDashboardData,
 } from '../../types/DashboardData'
 
 export const generateTemperatureDashboardData = ({
@@ -56,6 +58,16 @@ export const generateWindDashboardData = ({
   max_wind_angle,
 })
 
+export const generateAuxiliaryDashboardData = ({
+  CO2,
+  Pressure,
+  Noise,
+}: MainModuleData): AuxiliaryDashboardData => ({
+  CO2,
+  Pressure,
+  Noise,
+})
+
 export const generateUniversalData = (rawData: StationData): UniversalData => ({
   time_utc: rawData.time_server,
   station_name: _.get(rawData, 'body.devices[0].station_name', ''),
@@ -72,7 +84,11 @@ export const parseRawData = (rawData: StationData): DashboardData => {
     windDashboardData: null,
   } as DashboardData
   const modules: ModuleData[] = _.get(rawData, 'body.devices[0].modules', [])
-  const mainModule: MainModuleData = _.get(rawData, 'body.devices[0].dashboard_data', {})
+  const mainModule: MainModuleData = _.get(
+    rawData,
+    'body.devices[0].dashboard_data',
+    {},
+  )
   modules.forEach((module: ModuleData) =>
     parseModule(module, mainModule, output),
   )
@@ -87,6 +103,9 @@ export const parseModule = (
   const { type, dashboard_data } = rawModuleData
   switch (type) {
     case MODULE_TYPES.OUTDOOR:
+      output.auxiliaryDashboardData = generateAuxiliaryDashboardData(
+        rawMainData,
+      )
       output.indoorDashboardData = generateTemperatureDashboardData(rawMainData)
       output.outdoorDashboardData = generateTemperatureDashboardData(
         dashboard_data as OutdoorModuleData,
@@ -100,13 +119,11 @@ export const parseModule = (
       output.rainDashboardData = generateRainDashboardData(
         dashboard_data as RainModuleData,
       )
-
       break
     case MODULE_TYPES.WIND:
       output.windDashboardData = generateWindDashboardData(
         dashboard_data as WindModuleData,
       )
-
       break
     default:
       break

@@ -3,13 +3,13 @@ import { Text, View } from 'react-native'
 
 import { AuthContextProvider } from './contexts/AuthContext'
 import { StationContextProvider } from './contexts/StationContext'
-import DebugReadout from './components/DebugReadout'
+import Dashboard from './components/Dashboard'
 
 const Main = () => {
   return (
     <AuthContextProvider>
       <StationContextProvider>
-        <DebugReadout />
+        <Dashboard />
       </StationContextProvider>
     </AuthContextProvider>
   )
