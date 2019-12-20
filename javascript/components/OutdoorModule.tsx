@@ -1,22 +1,47 @@
-import React, { useContext } from 'react'
-import { StyleSheet, Text } from 'react-native'
+import React, { useContext, useMemo } from 'react'
+import { StyleSheet } from 'react-native'
 
 import DashboardModule from './DashboardModule'
 
 import StationContext from '../contexts/StationContext'
+import { cToF } from '../utils/conversions'
 
 import COLORS from '../constants/colors'
-import FONTS from '../constants/fonts'
+import UIText from './ui/UIText'
 
 const OutdoorModule = () => {
   const { outdoorDashboardData } = useContext(StationContext)
+
+  const temp = useMemo(
+    () => (outdoorDashboardData ? cToF(outdoorDashboardData.Temperature) : -1),
+    [outdoorDashboardData],
+  )
+
+  const max = useMemo(
+    () => (outdoorDashboardData ? cToF(outdoorDashboardData.max_temp) : 0),
+    [outdoorDashboardData],
+  )
+
+  const min = useMemo(
+    () => (outdoorDashboardData ? cToF(outdoorDashboardData.min_temp) : 0),
+    [outdoorDashboardData],
+  )
+
   return (
     <DashboardModule color={COLORS.blue1}>
       <>
-        <Text style={{ color: COLORS.tan, fontFamily: FONTS.eczar }}>OutdoorModule</Text>
-        <Text style={{ color: COLORS.tan }}>
-          {JSON.stringify(outdoorDashboardData, null, 2)}
-        </Text>
+        <UIText color="tan" size="medium" font="plexLight">
+          Outdoor
+        </UIText>
+        <UIText color="tan" size="xxl" font="eczar">
+          {`${temp}°`}
+        </UIText>
+        <UIText color="high" size="medium" font="plexBold">
+          {`${max}° High`}
+        </UIText>
+        <UIText color="low" size="medium" font="plexBold">
+          {`${min}° Low`}
+        </UIText>
       </>
     </DashboardModule>
   )
@@ -29,4 +54,3 @@ const STYLES = StyleSheet.create({
 })
 
 export default OutdoorModule
-

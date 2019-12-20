@@ -13,7 +13,9 @@ const DashboardModule = ({ children, color }: Props) => (
 const STYLES = StyleSheet.create({
   flex: {
     flex: 1,
-    height: '100%'
+    height: '100%',
+    paddingLeft: 30,
+    paddingTop: 60,
   },
 })
 
