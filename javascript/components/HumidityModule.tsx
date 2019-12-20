@@ -5,7 +5,7 @@ import DashboardModule from './DashboardModule'
 
 import StationContext from '../contexts/StationContext'
 
-import COLORS from '../constants/Colors'
+import COLORS from '../constants/colors'
 
 const HumidityModule = () => {
   const { humidityDashboardData, universalData } = useContext(StationContext)

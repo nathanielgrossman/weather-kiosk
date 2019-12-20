@@ -5,14 +5,15 @@ import DashboardModule from './DashboardModule'
 
 import StationContext from '../contexts/StationContext'
 
-import COLORS from '../constants/Colors'
+import COLORS from '../constants/colors'
+import FONTS from '../constants/fonts'
 
 const OutdoorModule = () => {
   const { outdoorDashboardData } = useContext(StationContext)
   return (
     <DashboardModule color={COLORS.blue1}>
       <>
-        <Text style={{ color: COLORS.tan }}>OutdoorModule</Text>
+        <Text style={{ color: COLORS.tan, fontFamily: FONTS.eczar }}>OutdoorModule</Text>
         <Text style={{ color: COLORS.tan }}>
           {JSON.stringify(outdoorDashboardData, null, 2)}
         </Text>
