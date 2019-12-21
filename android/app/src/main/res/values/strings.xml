@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WeatherKiosk</string>
+    <string name="sample_device_admin">WeatherKiosk</string>
+    <string name="sample_device_admin_description">WeatherKiosk</string>
 </resources>

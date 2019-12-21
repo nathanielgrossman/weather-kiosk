@@ -5135,6 +5135,11 @@ react-native-dotenv@^0.2.0:
   dependencies:
     babel-plugin-dotenv "0.1.1"
 
+react-native-lock-task@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/react-native-lock-task/-/react-native-lock-task-1.0.8.tgz#9f969e7623b557b5fe74b51199b995d7073f1b79"
+  integrity sha512-VRu4Xcqh1p7MDrylXTqdebAwWFh8DT2sS6MYfnflGVvOdK9ZurZ30G+4mA2gSM2CbrdaEuCdxwwqBfITCUYloA==
+
 react-native-svg@^9.13.6:
   version "9.13.6"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-9.13.6.tgz#5365fba2bc460054b90851e71f2a71006a5d373f"

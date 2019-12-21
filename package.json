@@ -15,6 +15,7 @@
     "moment": "^2.24.0",
     "react": "16.9.0",
     "react-native": "0.61.5",
+    "react-native-lock-task": "^1.0.8",
     "react-native-svg": "^9.13.6"
   },
   "devDependencies": {
