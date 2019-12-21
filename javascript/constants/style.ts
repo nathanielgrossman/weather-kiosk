@@ -3,5 +3,6 @@ export const TEXT_SIZES = {
   xl: 96,
   large: 48,
   medium: 36,
-  small: 24
+  small: 24,
+  subScript: 18
 }

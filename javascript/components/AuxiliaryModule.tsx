@@ -1,11 +1,11 @@
 import React, { useContext, useMemo } from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 
 import DashboardModule from './DashboardModule'
 import UIText from './ui/UIText'
 
 import StationContext from '../contexts/StationContext'
-import {getPPMColor} from '../utils/conversions'
+import { getPPMColor } from '../utils/conversions'
 
 import COLORS from '../constants/colors'
 
@@ -27,9 +27,14 @@ const AuxiliaryModule = () => {
           </UIText>
         </View>
         <View>
-          <UIText color="tan" size="medium" font="plexLight">
-            CO2
-          </UIText>
+          <View style={STYLES.rowWithSub}>
+            <UIText color="tan" size="medium" font="plexLight">
+              CO
+            </UIText>
+            <UIText color="tan" size="subScript" font="plexLight">
+              2
+            </UIText>
+          </View>
           <UIText color={ppmColor} size="medium" font="plexBold">
             {CO2} ppm
           </UIText>
@@ -46,5 +51,12 @@ const AuxiliaryModule = () => {
     </DashboardModule>
   )
 }
+
+const STYLES = StyleSheet.create({
+  rowWithSub: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+})
 
 export default AuxiliaryModule
