@@ -35,9 +35,14 @@ const DIRECTIONS = [
   'N',
 ]
 
+export const moduloDegrees = (degrees?: number) => {
+  if (degrees === undefined) return 0
+  return degrees % 360
+}
+
 export const degToDirection = (degrees?: number) => {
   if (degrees === undefined) return '~'
-  const degMod = degrees % 360
+  const degMod = moduloDegrees(degrees)
   const index = Math.round(degMod / 22.5)
   return DIRECTIONS[index]
 }

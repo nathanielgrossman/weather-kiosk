@@ -1,25 +1,34 @@
 import React, { useContext, useMemo } from 'react'
-import { View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 import DashboardModule from './DashboardModule'
 import UIText from './ui/UIText'
-
+import Compass from './Compass'
 import StationContext from '../contexts/StationContext'
-import { kmhToMph, degToDirection } from '../utils/conversions'
+import { kmhToMph, degToDirection, moduloDegrees } from '../utils/conversions'
 
 import COLORS from '../constants/colors'
 
+const COMPASS_SIZE = 100
+
 const WindModule = () => {
   const { windDashboardData } = useContext(StationContext)
-  const { WindStrength, WindAngle, max_wind_str, max_wind_angle} = windDashboardData || {}
+  const { WindStrength, WindAngle, max_wind_str, max_wind_angle } =
+    windDashboardData || {}
 
   const strength = useMemo(() => kmhToMph(WindStrength), [WindStrength])
 
   const angle = useMemo(() => degToDirection(WindAngle), [WindAngle])
 
+  const angleDegrees = useMemo(() => moduloDegrees(WindAngle), [
+    WindAngle,
+  ])
+
   const maxStrength = useMemo(() => kmhToMph(max_wind_str), [max_wind_str])
 
-  const maxAngle = useMemo(() => degToDirection(max_wind_angle), [max_wind_angle])
+  const maxAngle = useMemo(() => degToDirection(max_wind_angle), [
+    max_wind_angle,
+  ])
 
   return (
     <DashboardModule color={COLORS.blue2}>
@@ -27,7 +36,9 @@ const WindModule = () => {
         <UIText color="tan" size="medium" font="plexLight">
           Wind
         </UIText>
-        <View style={{ width: 100, height: 100, backgroundColor: COLORS.blue3 }} />
+        <View style={STYLES.compassWrapper}>
+          <Compass size={COMPASS_SIZE} rotation={angleDegrees} />
+        </View>
         <View>
           <UIText color="tan" size="medium" font="plexBold">
             {strength} mph
@@ -48,5 +59,12 @@ const WindModule = () => {
     </DashboardModule>
   )
 }
+
+const STYLES = StyleSheet.create({
+  compassWrapper: {
+    height: COMPASS_SIZE,
+    width: COMPASS_SIZE,
+  },
+})
 
 export default WindModule
