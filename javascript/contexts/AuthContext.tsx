@@ -21,7 +21,7 @@ const AuthContext = createContext(initialValues)
 export default AuthContext
 
 type Props = {
-  children: React.ReactChildren
+  children: React.ReactNode
 }
 
 export const AuthContextProvider = ({ children }: Props) => {

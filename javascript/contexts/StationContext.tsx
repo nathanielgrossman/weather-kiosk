@@ -26,7 +26,7 @@ const StationContext = createContext(initialValues)
 export default StationContext
 
 type Props = {
-  children: React.ReactChildren
+  children: React.ReactNode
 }
 
 export const StationContextProvider = ({ children }: Props) => {
