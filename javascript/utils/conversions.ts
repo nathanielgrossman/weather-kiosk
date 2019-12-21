@@ -39,3 +39,11 @@ export const degToDirection = (degrees?: number) => {
   const index = Math.round(degMod / 22.5)
   return DIRECTIONS[index]
 }
+
+export const getPPMColor = (ppm?: number) => {
+  if (ppm === undefined) return 'tan'
+  else if (ppm < 350) return 'ppm0'
+  else if (ppm < 750) return 'ppm350'
+  else if (ppm < 1500) return 'ppm750'
+  else return 'ppm1500'
+}
