@@ -26,14 +26,14 @@ const OutdoorModule = () => {
           Outdoor
         </UIText>
         <UIText color="tan" size="xxl" font="eczar" style={STYLES.mainReadout}>
-          {`${temp}°`}
+          {temp}°
         </UIText>
         <View>
           <UIText color="high" size="medium" font="plexBold">
-            {`${max}° High`}
+            {max}° High
           </UIText>
           <UIText color="low" size="medium" font="plexBold">
-            {`${min}° Low`}
+            {min}° Low
           </UIText>
         </View>
       </>
