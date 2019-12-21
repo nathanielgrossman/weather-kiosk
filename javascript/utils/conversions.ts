@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 export const cToF = (celsius?: number) => {
   if (!celsius) return -1
   return ((celsius * 9) / 5 + 32).toFixed(1)
@@ -46,4 +48,14 @@ export const getPPMColor = (ppm?: number) => {
   else if (ppm < 750) return 'ppm350'
   else if (ppm < 1500) return 'ppm750'
   else return 'ppm1500'
+}
+
+export const utcToTime = (utc?: string) => {
+  if (!utc) return 'error'
+  return moment.unix(Number(utc)).format('hh:mm a')
+}
+
+export const utcToDate = (utc?: string) => {
+  if (!utc) return ''
+  return moment.unix(Number(utc)).format('MMM DD, YYYY')
 }
