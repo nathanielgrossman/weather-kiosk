@@ -30,7 +30,7 @@ const RainModule = () => {
           Past 1h
         </UIText>
         <UIText color="tan" size="xl" font="eczar" style={STYLES.mainReadout}>
-          {sum_rain_24}"
+          {sum24}"
         </UIText>
         <UIText color="tan" size="small" font="plexBold">
           Past 24h
