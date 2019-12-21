@@ -4,6 +4,38 @@ export const cToF = (celsius?: number) => {
 }
 
 export const mmToIn = (mm?: number) => {
-  if (!mm) return 0.00
+  if (!mm) return 0.0
   return (mm * 0.0393701).toFixed(2)
+}
+
+export const kmhToMph = (mm?: number) => {
+  if (!mm) return 0.0
+  return (mm * 0.621371).toFixed(2)
+}
+
+const DIRECTIONS = [
+  'N',
+  'NNE',
+  'NE',
+  'ENE',
+  'E',
+  'ESE',
+  'SE',
+  'SSE',
+  'S',
+  'SSW',
+  'SW',
+  'WSW',
+  'W',
+  'WNW',
+  'NW',
+  'NNW',
+  'N',
+]
+
+export const degToDirection = (degrees?: number) => {
+  if (degrees === undefined) return '~'
+  const degMod = degrees % 360
+  const index = Math.round(degMod / 22.5)
+  return DIRECTIONS[index]
 }
