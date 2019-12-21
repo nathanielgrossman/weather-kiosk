@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 import DashboardModule from './DashboardModule'
 
@@ -11,37 +11,31 @@ import UIText from './ui/UIText'
 
 const OutdoorModule = () => {
   const { outdoorDashboardData } = useContext(StationContext)
+  const { Temperature, max_temp, min_temp } = outdoorDashboardData || {}
 
-  const temp = useMemo(
-    () => (outdoorDashboardData ? cToF(outdoorDashboardData.Temperature) : -1),
-    [outdoorDashboardData],
-  )
+  const temp = useMemo(() => cToF(Temperature), [Temperature])
 
-  const max = useMemo(
-    () => (outdoorDashboardData ? cToF(outdoorDashboardData.max_temp) : 0),
-    [outdoorDashboardData],
-  )
+  const max = useMemo(() => cToF(max_temp), [max_temp])
 
-  const min = useMemo(
-    () => (outdoorDashboardData ? cToF(outdoorDashboardData.min_temp) : 0),
-    [outdoorDashboardData],
-  )
+  const min = useMemo(() => cToF(min_temp), [min_temp])
 
   return (
     <DashboardModule color={COLORS.blue1}>
       <>
-        <UIText color="tan" size="medium" font="plexLight">
+        <UIText color="tan" size="large" font="plexLight">
           Outdoor
         </UIText>
-        <UIText color="tan" size="xxl" font="eczar">
+        <UIText color="tan" size="xxl" font="eczar" style={STYLES.mainReadout}>
           {`${temp}°`}
         </UIText>
-        <UIText color="high" size="medium" font="plexBold">
-          {`${max}° High`}
-        </UIText>
-        <UIText color="low" size="medium" font="plexBold">
-          {`${min}° Low`}
-        </UIText>
+        <View>
+          <UIText color="high" size="medium" font="plexBold">
+            {`${max}° High`}
+          </UIText>
+          <UIText color="low" size="medium" font="plexBold">
+            {`${min}° Low`}
+          </UIText>
+        </View>
       </>
     </DashboardModule>
   )
@@ -50,6 +44,11 @@ const OutdoorModule = () => {
 const STYLES = StyleSheet.create({
   flex: {
     flex: 1,
+  },
+  mainReadout: {
+    marginBottom: -60,
+    marginTop: -50,
+    lineHeight: 172,
   },
 })
 

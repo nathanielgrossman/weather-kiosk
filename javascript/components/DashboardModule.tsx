@@ -13,8 +13,10 @@ const DashboardModule = ({ children, color }: Props) => (
 const STYLES = StyleSheet.create({
   flex: {
     flex: 1,
+    justifyContent: 'space-between',
     height: '100%',
     paddingLeft: 30,
+    paddingBottom: 30,
     paddingTop: 60,
   },
 })
