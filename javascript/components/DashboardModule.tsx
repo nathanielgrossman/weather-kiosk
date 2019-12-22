@@ -17,7 +17,7 @@ const STYLES = StyleSheet.create({
     height: '100%',
     paddingLeft: 30,
     paddingBottom: 30,
-    paddingTop: 60,
+    paddingTop: 30,
   },
 })
 

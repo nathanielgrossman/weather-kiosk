@@ -5,19 +5,12 @@ import DashboardModule from './DashboardModule'
 import UIText from './ui/UIText'
 
 import StationContext from '../contexts/StationContext'
-import { utcToTime, utcToDate } from '../utils/conversions'
 
 import COLORS from '../constants/colors'
 
 const HumidityModule = () => {
-  const { humidityDashboardData, universalData } = useContext(StationContext)
+  const { humidityDashboardData } = useContext(StationContext)
   const { outdoor, indoor } = humidityDashboardData || {}
-  const { time_utc, station_name } = universalData || {}
-
-  const time = useMemo(() => utcToTime(time_utc), [time_utc])
-
-  const date = useMemo(() => utcToDate(time_utc), [time_utc])
-
   return (
     <DashboardModule color={COLORS.tan}>
       <>
@@ -30,29 +23,6 @@ const HumidityModule = () => {
           </UIText>
           <UIText color="blue4" size="medium" font="plexBold">
             {indoor}% in
-          </UIText>
-        </View>
-        <View>
-          <UIText
-            color="blue3"
-            size="small"
-            font="eczar"
-            style={STYLES.universalText}>
-            {time}
-          </UIText>
-          <UIText
-            color="blue3"
-            size="small"
-            font="eczar"
-            style={STYLES.universalText}>
-            {date}
-          </UIText>
-          <UIText
-            color="blue3"
-            size="small"
-            font="eczar"
-            style={STYLES.universalText}>
-            {station_name}
           </UIText>
         </View>
       </>

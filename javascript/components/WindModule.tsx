@@ -20,9 +20,7 @@ const WindModule = () => {
 
   const angle = useMemo(() => degToDirection(WindAngle), [WindAngle])
 
-  const angleDegrees = useMemo(() => moduloDegrees(WindAngle), [
-    WindAngle,
-  ])
+  const angleDegrees = useMemo(() => moduloDegrees(WindAngle), [WindAngle])
 
   const maxStrength = useMemo(() => kmhToMph(max_wind_str), [max_wind_str])
 

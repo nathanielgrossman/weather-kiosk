@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, StatusBar } from 'react-native'
 
+import TopBar from './TopBar'
 import OutdoorModule from './OutdoorModule'
 import IndoorModule from './IndoorModule'
 import WindModule from './WindModule'
@@ -12,16 +13,19 @@ const Dashboard = () => {
 
   return (
     <View style={STYLES.flex}>
-      <StatusBar hidden={true} />
-      <View style={STYLES.row}>
-        <OutdoorModule />
-        <WindModule />
-        <RainModule />
-      </View>
-      <View style={STYLES.row}>
-        <IndoorModule />
-        <AuxiliaryModule />
-        <HumidityModule />
+      <TopBar />
+      <View style={STYLES.flex}>
+        <StatusBar hidden={true} />
+        <View style={STYLES.row}>
+          <OutdoorModule />
+          <WindModule />
+          <RainModule />
+        </View>
+        <View style={STYLES.row}>
+          <IndoorModule />
+          <AuxiliaryModule />
+          <HumidityModule />
+        </View>
       </View>
     </View>
   )

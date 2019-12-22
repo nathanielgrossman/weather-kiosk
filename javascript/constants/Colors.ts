@@ -1,4 +1,5 @@
 export default {
+  blue0: '#2F2F38',
   blue1: '#2C2D52',
   blue2: '#3A3B6B',
   blue3: '#414278',
