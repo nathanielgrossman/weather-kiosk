@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native'
 
 import DashboardModule from './DashboardModule'
 import UIText from './ui/UIText'
+import GraphicsSelector from './GraphicsSelector'
 
 import StationContext from '../contexts/StationContext'
 
@@ -25,6 +26,7 @@ const HumidityModule = () => {
             {indoor}% in
           </UIText>
         </View>
+        <GraphicsSelector size={150} />
       </>
     </DashboardModule>
   )
