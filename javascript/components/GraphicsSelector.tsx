@@ -1,5 +1,5 @@
-import React, { useContext, useMemo, useState } from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import React, { useContext, useMemo } from 'react'
+import { View, StyleSheet } from 'react-native'
 
 import AuthContext from '../contexts/AuthContext'
 
@@ -19,8 +19,7 @@ type Props = {
 const graphics = [Bob, Foxy, Hummer, Sage, Quail, Peak, Acorn, Walnut]
 
 const GraphicsSelector = ({ size }: Props) => {
-  // const { accessToken } = useContext(AuthContext)
-  const [accessToken, setAT] = useState(1)
+  const { accessToken } = useContext(AuthContext)
 
   const Graphic = useMemo(
     () => graphics[Math.floor(Math.random() * graphics.length)],
@@ -29,9 +28,7 @@ const GraphicsSelector = ({ size }: Props) => {
 
   return (
     <View style={STYLES.container}>
-      <TouchableOpacity onPress={() => setAT(Math.random())}>
-        <Graphic size={size} />
-      </TouchableOpacity>
+      <Graphic size={size} />
     </View>
   )
 }
