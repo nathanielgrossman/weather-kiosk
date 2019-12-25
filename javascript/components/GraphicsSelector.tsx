@@ -1,7 +1,5 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import { View, StyleSheet } from 'react-native'
-
-import AuthContext from '../contexts/AuthContext'
 
 import Bob from './graphics/Bob'
 import Foxy from './graphics/Foxy'
@@ -16,14 +14,31 @@ type Props = {
   size: number
 }
 
-const graphics = [Bob, Foxy, Hummer, Sage, Quail, Peak, Acorn, Walnut]
+const ONE_HOUR = 60 * 60 * 1000
+
+const GRAPHICS = [Bob, Foxy, Hummer, Sage, Quail, Peak, Acorn, Walnut]
 
 const GraphicsSelector = ({ size }: Props) => {
-  const { accessToken } = useContext(AuthContext)
+  const [random, setRandom] = useState(0)
+
+  useEffect(() => {
+    let refreshTimeout: number
+
+    const updateRandom = () => {
+      setRandom(Math.random())
+      refreshTimeout = setTimeout(updateRandom, ONE_HOUR)
+    }
+
+    updateRandom()
+
+    return () => {
+      refreshTimeout && clearTimeout(refreshTimeout)
+    }
+  }, [])
 
   const Graphic = useMemo(
-    () => graphics[Math.floor(Math.random() * graphics.length)],
-    [accessToken],
+    () => GRAPHICS[Math.floor(random * GRAPHICS.length)],
+    [random],
   )
 
   return (
