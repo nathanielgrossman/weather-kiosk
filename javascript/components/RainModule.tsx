@@ -33,7 +33,7 @@ const RainModule = () => {
     }
 
     request()
-  }, [day])
+  }, [day, accessToken, _id])
 
   const sumBoth = useMemo(() => mmToIn(sum_rain_24 + sumYesterday), [
     sum_rain_24,
