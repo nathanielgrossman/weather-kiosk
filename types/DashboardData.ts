@@ -18,6 +18,7 @@ export interface HumidityDashboardData {
 export interface RainDashboardData {
   sum_rain_1: number
   sum_rain_24: number
+  _id: string
 }
 
 export interface WindDashboardData {

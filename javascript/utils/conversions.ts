@@ -1,17 +1,17 @@
 import moment from 'moment'
 
 export const cToF = (celsius?: number) => {
-  if (!celsius) return -1
+  if (!celsius) return '-1'
   return ((celsius * 9) / 5 + 32).toFixed(1)
 }
 
 export const mmToIn = (mm?: number) => {
-  if (!mm) return 0.0
+  if (!mm) return '0.0'
   return (mm * 0.0393701).toFixed(2)
 }
 
 export const kmhToMph = (mm?: number) => {
-  if (!mm) return 0.0
+  if (!mm) return '0.0'
   return (mm * 0.621371).toFixed(2)
 }
 

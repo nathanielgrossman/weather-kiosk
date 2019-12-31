@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import moment from 'moment'
 
 import {
   OutdoorModuleData,
@@ -41,10 +42,10 @@ export const generateHumidityDashboardData = (
   }
 }
 
-export const generateRainDashboardData = ({
-  sum_rain_1,
-  sum_rain_24,
-}: RainModuleData): RainDashboardData => ({ sum_rain_1, sum_rain_24 })
+export const generateRainDashboardData = (
+  { sum_rain_1, sum_rain_24 }: RainModuleData,
+  _id: string,
+): RainDashboardData => ({ sum_rain_1, sum_rain_24, _id })
 
 export const generateWindDashboardData = ({
   WindStrength,
@@ -100,7 +101,7 @@ export const parseModule = (
   rawMainData: MainModuleData,
   output: Partial<DashboardData>,
 ) => {
-  const { type, dashboard_data } = rawModuleData
+  const { _id, type, dashboard_data } = rawModuleData
   switch (type) {
     case MODULE_TYPES.OUTDOOR:
       output.auxiliaryDashboardData = generateAuxiliaryDashboardData(
@@ -118,6 +119,7 @@ export const parseModule = (
     case MODULE_TYPES.RAIN:
       output.rainDashboardData = generateRainDashboardData(
         dashboard_data as RainModuleData,
+        _id,
       )
       break
     case MODULE_TYPES.WIND:
@@ -129,3 +131,5 @@ export const parseModule = (
       break
   }
 }
+
+export const getCurrentDay = () => moment().format('MMM-D')
