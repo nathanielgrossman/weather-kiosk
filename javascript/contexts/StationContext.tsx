@@ -49,7 +49,7 @@ export const StationContextProvider = ({ children }: Props) => {
           })
         }
       }
-      refreshTimeout = setTimeout(request, 10000)
+      refreshTimeout = setTimeout(request, 30000)
     }
 
     request()
