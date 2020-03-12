@@ -30,7 +30,8 @@ export const getStationsData = async (token: string) => {
 export const getYesterdayRain = async (token: string, module_id: string) => {
   const date_begin = moment()
     .endOf('day')
-    .subtract(1, 'days')
+    .utcOffset(0)
+    .subtract(2, 'days')
     .format('X')
   const params = {
     device_id: MAC_ADDRESS,
